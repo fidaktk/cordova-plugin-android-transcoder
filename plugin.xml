@@ -16,14 +16,14 @@
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Transcoder">
-                <param name="android-package" value="com.otaliastudios.transcoder.Transcoder"/>
+                <param name="android-package" value="cordova.plugin.android.transcoder.Transcoder"/>
             </feature>
         </config-file>
         
-        <framework src="com.otaliastudios:transcoder:0.10.5" custom="true" />
+        <framework src="com.otaliastudios:transcoder:+" custom="true" />
         <plugin-repository url="https://maven.google.com" />
         <plugin-repository url="https://repo.maven.apache.org/maven2/" />
         
-        <source-file src="src/android/Transcoder.java" target-dir="src/cordova/plugin/android" />
+        <source-file src="src/android/Transcoder.java" target-dir="src/cordova/plugin/android/transcoder" />
     </platform>
 </plugin>
