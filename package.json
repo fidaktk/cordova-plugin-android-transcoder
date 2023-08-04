@@ -1,0 +1,26 @@
+{
+  "name": "cordova-plugin-android-transcoder",
+  "version": "1.0.0",
+  "description": "A Cordova plugin to transcode videos on Android",
+  "cordova": {
+    "id": "cordova-plugin-android-transcoder",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "transcode",
+    "video",
+    "android"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fidaktk/cordova-plugin-android-transcoder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/fidaktk/cordova-plugin-android-transcoder/issues"
+  },
+  "homepage": "https://github.com/fidaktk/cordova-plugin-android-transcoder#readme"
+}
