@@ -23,6 +23,6 @@
 <framework src="src/android/transcoder.gradle" custom="true" type="gradleReference" />
 
 
-        <source-file src="src/android/Transcoder.java" target-dir="src/cordova/plugin/android/transcoder" />
+        <source-file src="src/android/TranscoderPlugin.java" target-dir="src/cordova/plugin/android/transcoder" />
     </platform>
 </plugin>
