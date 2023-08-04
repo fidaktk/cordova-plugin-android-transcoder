@@ -1,7 +1,6 @@
 package cordova.plugin.android.transcoder;
-
-import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,58 +9,43 @@ import com.otaliastudios.transcoder.Transcoder;
 import com.otaliastudios.transcoder.TranscoderListener;
 import com.otaliastudios.transcoder.engine.TrackType;
 
-public class Transcoder extends CordovaPlugin {
+import java.io.File;
+
+public class TranscoderPlugin extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("transcode")) {
-            this.transcode(args, callbackContext);
+            String inputPath = args.getString(0);
+            String outputPath = args.getString(1);
+            this.transcode(inputPath, outputPath, callbackContext);
             return true;
         }
         return false;
     }
 
-    private void transcode(JSONArray args, CallbackContext callbackContext) {
-        try {
-            String inputPath = args.getString(0);
-            String outputPath = args.getString(1);
+    private void transcode(String inputPath, String outputPath, CallbackContext callbackContext) {
+        Transcoder.into(outputPath)
+            .addDataSource(inputPath)
+            .start(new TranscoderListener() {
+                @Override
+                public void onTranscodeProgress(double progress) {
+                }
 
-            cordova.getThreadPool().execute(new Runnable() {
-                public void run() {
-                    try {
-                        boolean result = Transcoder.into(outputPath)
-                                .addDataSource(inputPath)
-                                .setListener(new TranscoderListener() {
-                                    public void onTranscodeProgress(double progress) {}
+                @Override
+                public void onTranscodeCompleted(int successCode) {
+                    callbackContext.success("Transcoding completed with code: " + successCode);
+                }
 
-                                    public void onTranscodeCompleted(int successCode) {
-                                        if (Transcoder.SUCCESS_TRANSCODED == successCode) {
-                                            callbackContext.success();
-                                        } else if (Transcoder.SUCCESS_NOT_NEEDED == successCode) {
-                                            callbackContext.error("Transcoding not needed");
-                                        }
-                                    }
+                @Override
+                public void onTranscodeCanceled() {
+                    callbackContext.error("Transcoding was cancelled");
+                }
 
-                                    public void onTranscodeCanceled() {
-                                        callbackContext.error("Transcoding cancelled");
-                                    }
-
-                                    public void onTranscodeFailed(@NonNull Throwable exception) {
-                                        callbackContext.error(exception.getMessage());
-                                    }
-                                })
-                                .transcode();
-
-                        if (!result) {
-                            callbackContext.error("Transcoder not available");
-                        }
-                    } catch (Exception e) {
-                        callbackContext.error("Transcoding error: " + e.getMessage());
-                    }
+                @Override
+                public void onTranscodeFailed(Exception exception) {
+                    callbackContext.error("Transcoding failed with error: " + exception.getMessage());
                 }
             });
-        } catch (JSONException e) {
-            callbackContext.error("Invalid arguments: " + e.getMessage());
-        }
     }
 }
