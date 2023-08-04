@@ -11,7 +11,7 @@ import com.otaliastudios.transcoder.TranscoderListener;
 
 import java.io.File;
 
-public class TranscoderPlugin extends CordovaPlugin {
+public class Transcoder extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
