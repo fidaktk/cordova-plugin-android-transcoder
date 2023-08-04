@@ -20,8 +20,8 @@
             </feature>
         </config-file>
         
-        <framework src="com.otaliastudios:transcoder:0.10.5" custom="true" />
-        <plugin-repository url="https://repo1.maven.org/maven2/" />
+<framework src="src/android/transcoder.gradle" custom="true" type="gradleReference" />
+
 
         <source-file src="src/android/Transcoder.java" target-dir="src/cordova/plugin/android/transcoder" />
     </platform>

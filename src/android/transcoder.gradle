@@ -1,0 +1,7 @@
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.otaliastudios:transcoder:0.10.5'
+}
