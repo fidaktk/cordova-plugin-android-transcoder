@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="cordova-plugin-android-transcoder"
+    version="1.0.0">
+    <name>Transcoder</name>
+    <description>Cordova plugin for Android Transcoder</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,transcoder</keywords>
+
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <js-module src="www/Transcoder.js" name="Transcoder">
+        <clobbers target="cordova.plugins.Transcoder" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Transcoder">
+                <param name="android-package" value="cordova.plugin.android.transcoder.Transcoder" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/Transcoder.java" target-dir="src/cordova/plugin/android/transcoder" />
+
+        <framework src="com.natario1:transcoder:1.0.0" custom="true" />
+    </platform>
+</plugin>
